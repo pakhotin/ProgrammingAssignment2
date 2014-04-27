@@ -51,17 +51,20 @@ makeCacheMatrix <- function(x = matrix()) {
 # However, this function first checks if the inverted matrix has
 # already been calculated and the matrix has not changed:
 #   * if so, it gets the inverted matrix from the cache and skips
-#     the computation
+#     the computation. Note, the function prints out "getting
+#     cached inverted matrix" in this case
 #   * otherwise, it calculates the inverted matrix of the data and
 #     sets the "value" of the inverted matrix in the cache via the
-#     "setInverse" function
+#     "setInverse" function. Note, the function prints out "calculate
+#     inverted matrix and store it in cache" in this case
 cacheSolve <- function(x = matrix()) {
         ## Return a matrix that is the inverse of 'x'
     inverse <- x$getInverse()
     if(!is.null(inverse)) {
-      message("getting cached data")
+      message("getting cached inverted matrix")
       return(inverse)
     }
+    message("calculate inverted matrix and store it in cache")
     data <- x$get()
     inverse <- solve(data)
     x$setInverse(inverse)
